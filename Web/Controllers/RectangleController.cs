@@ -10,15 +10,17 @@ public class RectangleController : ControllerBase
 {
     private readonly ILogger<RectangleController> _logger;
 
-    public RectangleController(ILogger<RectangleController> logger)
+    private readonly IRectangleStorage _rectangleStorage;
+
+    public RectangleController(ILogger<RectangleController> logger, IRectangleStorage rectangleStorage)
     {
         _logger = logger;
+        _rectangleStorage = rectangleStorage;
     }
 
     [HttpPost(Name = "GetRectangles")]
     public IEnumerable<Rectangle> Get()
     {
-        //TODO inject:
-        return new RectangleStorage().GetRectangles();
+        return _rectangleStorage.GetRectangles();
     }
 }
