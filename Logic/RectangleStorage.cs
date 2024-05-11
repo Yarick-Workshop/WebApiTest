@@ -4,7 +4,7 @@ namespace Logic;
 
 public class RectangleStorage : IRectangleStorage
 {
-    public Rectangle[] GetRectangles()
+    public Rectangle[] GetRectangles(IBoundingRectangle searchingSegment)
     {
         return Enumerable.Range(1, 5).Select(index => 
         {
@@ -20,6 +20,11 @@ public class RectangleStorage : IRectangleStorage
 
             return res;
         })
+        .Where(x => x.MinX <= searchingSegment.MaxX && 
+                    x.MinY <= searchingSegment.MaxY &&
+                    
+                    x.MaxX >= searchingSegment.MinX &&
+                    x.MaxY >= searchingSegment.MinY)
         .ToArray();
     }
 }
