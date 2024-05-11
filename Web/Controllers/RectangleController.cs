@@ -1,4 +1,5 @@
 using Common;
+using Logic;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers;
@@ -17,20 +18,7 @@ public class RectangleController : ControllerBase
     [HttpPost(Name = "GetRectangles")]
     public IEnumerable<Rectangle> Get()
     {
-        return Enumerable.Range(1, 5).Select(index => 
-        {
-            var res = new Rectangle
-            {
-                Id = index,
-                MinX = Random.Shared.Next(1000),
-                MinY = Random.Shared.Next(1000),
-            };
-
-            res.MaxX = res.MinX + Random.Shared.Next(1000);
-            res.MaxY = res.MinY + Random.Shared.Next(1000);
-
-            return res;
-        })
-        .ToArray();
+        //TODO inject:
+        return new RectangleStorage().GetRectangles();
     }
 }
