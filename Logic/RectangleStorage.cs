@@ -46,11 +46,12 @@ public class RectangleStorage : IRectangleStorage
     }
 
 #if DEBUG
+    private const int MaxRectangleGenerationAmount = 1000;
     public void GenerateList(int amount)
     {
-        if (amount <= 0 || amount > 1000)
+        if (amount <= 0 || amount > MaxRectangleGenerationAmount)
         {//TODO tests
-            throw new ArgumentOutOfRangeException(nameof(amount));
+            throw new ArgumentOutOfRangeException(nameof(amount), $"Has to be between 1 and {MaxRectangleGenerationAmount}");
         }
 
         // Truncate Table
