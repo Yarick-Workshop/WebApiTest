@@ -23,4 +23,13 @@ public class RectangleController : ControllerBase
     {
         return _rectangleStorage.GetRectangles(request);
     }
+
+#if DEBUG
+    [HttpPut(Name = "RecreateRectangles")]
+    public void Recreate(int amount)
+    {
+        _rectangleStorage.Recreate(amount);
+    }
+#endif
+
 }
