@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace DAL;
 
@@ -6,19 +7,15 @@ public class TestDbContext : DbContext
 {
     public DbSet<Rectangle> Rectangles { get; set; }
 
-    public string DbPath { get; }
+    protected readonly IConfiguration Configuration;
 
-    public TestDbContext()
+    public TestDbContext(IConfiguration configuration)
     {
-        var folder = Environment.SpecialFolder.LocalApplicationData;
-
-        var path = Environment.GetFolderPath(folder);
-
-        DbPath = System.IO.Path.Join(path, "test.db");
+        Configuration = configuration;
     }
 
-    // The following configures EF to create a Sqlite database file in the
-    // special "local" folder for your platform.
     protected override void OnConfiguring(DbContextOptionsBuilder options)
-        => options.UseSqlite($"Data Source={DbPath}");
+    {
+        options.UseSqlite(Configuration.GetConnectionString("WebApiDatabase"));
+    }
 }
