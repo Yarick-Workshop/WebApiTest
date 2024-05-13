@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Web.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("[controller]/[action]")]
 public class RectangleController : ControllerBase
 {
     private readonly ILogger<RectangleController> _logger;
@@ -18,17 +18,30 @@ public class RectangleController : ControllerBase
         _rectangleStorage = rectangleStorage;
     }
 
-    [HttpPost(Name = "GetRectangles")]
-    public IEnumerable<RectangleView> Get(GetRectanglesRequest request)
+    /// <summary>
+    /// Fetches list of rectangles which intersect correspond searching rectangle
+    /// 
+    /// POST /Rectangle/GetIntersected
+    /// </summary>
+    /// <param name="request">Searching rectangle</param>
+    /// <returns>Lits of rectangles</returns>
+    [HttpPost]
+    public IEnumerable<RectangleView> GetIntersected(GetRectanglesRequest request)
     {
-        return _rectangleStorage.GetRectangles(request);
+        return _rectangleStorage.GetIntersected(request);
     }
 
 #if DEBUG
-    [HttpPut(Name = "RecreateRectangles")]
-    public void Recreate(int amount)
+    /// <summary>
+    /// Creates list of rectangles with random parameters
+    /// 
+    /// PUT /Rectangle/GenerateList
+    /// </summary>
+    /// <param name="amount">How many random rectangles to create</param>
+    [HttpPut]
+    public void GenerateList(int amount)
     {
-        _rectangleStorage.Recreate(amount);
+        _rectangleStorage.GenerateList(amount);
     }
 #endif
 

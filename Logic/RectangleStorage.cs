@@ -12,7 +12,7 @@ public class RectangleStorage : IRectangleStorage
         _dbContext = dbContext;
     }
 
-    public RectangleView[] GetRectangles(IBoundingRectangle searchingSegment)
+    public RectangleView[] GetIntersected(IBoundingRectangle searchingSegment)
     {
         //TODO unit tests for parameters validation
         if (searchingSegment.MinX >= searchingSegment.MaxX)
@@ -46,7 +46,7 @@ public class RectangleStorage : IRectangleStorage
     }
 
 #if DEBUG
-    public void Recreate(int amount)
+    public void GenerateList(int amount)
     {
         if (amount <= 0 || amount > 1000)
         {//TODO tests

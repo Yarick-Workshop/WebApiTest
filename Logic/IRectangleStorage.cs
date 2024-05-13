@@ -4,10 +4,10 @@ namespace Logic;
 
 public interface IRectangleStorage
 {
-    RectangleView[] GetRectangles(IBoundingRectangle searchingSegment);
+    RectangleView[] GetIntersected(IBoundingRectangle searchingSegment);
 
 #if DEBUG
-    void Recreate(int amount);
+    void GenerateList(int amount);
 #endif 
 
 }
