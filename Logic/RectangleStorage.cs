@@ -56,8 +56,8 @@ public class RectangleStorage : IRectangleStorage
                     MinY = Random.Shared.Next(1000),
                 };
 
-                res.MaxX = res.MinX + Random.Shared.Next(1000);
-                res.MaxY = res.MinY + Random.Shared.Next(1000);
+                res.MaxX = res.MinX + Random.Shared.Next(1, 1000);
+                res.MaxY = res.MinY + Random.Shared.Next(1, 1000);
 
                 return res;
             });
