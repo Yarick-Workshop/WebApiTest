@@ -26,9 +26,9 @@ public class RectangleController : ControllerBase
     /// <param name="request">Searching rectangle</param>
     /// <returns>Lits of rectangles</returns>
     [HttpPost]
-    public IEnumerable<RectangleView> GetIntersected(GetRectanglesRequest request)
+    public async Task<IEnumerable<RectangleView>> GetIntersected(GetRectanglesRequest request)
     {
-        return _rectangleService.GetIntersected(request);
+        return await _rectangleService.GetIntersectedAsync(request);
     }
 
 #if DEBUG
@@ -39,9 +39,9 @@ public class RectangleController : ControllerBase
     /// </summary>
     /// <param name="amount">How many random rectangles to create</param>
     [HttpPut]
-    public void GenerateList(int amount)
+    public async Task GenerateList(int amount)
     {
-        _rectangleService.GenerateList(amount);
+        await _rectangleService.GenerateListAsync(amount);
     }
 #endif
 

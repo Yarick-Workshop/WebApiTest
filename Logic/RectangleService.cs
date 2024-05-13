@@ -1,5 +1,6 @@
 ﻿using Common;
 using DAL;
+using Microsoft.EntityFrameworkCore;
 
 namespace Logic;
 
@@ -12,7 +13,7 @@ public class RectangleService : IRectangleService
         _dbContext = dbContext;
     }
 
-    public RectangleView[] GetIntersected(IBoundingRectangle searchingSegment)
+    public async Task<RectangleView[]> GetIntersectedAsync(IBoundingRectangle searchingSegment)
     {
         //TODO unit tests for parameters validation
         if (searchingSegment.MinX >= searchingSegment.MaxX)
@@ -25,14 +26,14 @@ public class RectangleService : IRectangleService
             throw new ArgumentException($"MaxY hast to be > MinY.");
         }
 
-        return _dbContext.Rectangles
+        return await _dbContext.Rectangles
         .Where(x => x.MinX <= searchingSegment.MaxX && 
                     x.MinY <= searchingSegment.MaxY &&
                     
                     x.MaxX >= searchingSegment.MinX &&
                     x.MaxY >= searchingSegment.MinY)
         //TODO I see no reason to use mapping as there are only 5 fields 
-        // and it is just a test project
+        // and it is just a test project        
         .Select(x => new RectangleView{
             Id = x.RectangleId,
             
@@ -42,12 +43,13 @@ public class RectangleService : IRectangleService
             MaxX = x.MaxX,
             MaxY = x.MaxY,
         })
-        .ToArray();
+        .ToArrayAsync();        
     }
 
 #if DEBUG
     private const int MaxRectangleGenerationAmount = 1000;
-    public void GenerateList(int amount)
+
+    public async Task GenerateListAsync(int amount)
     {
         if (amount <= 0 || amount > MaxRectangleGenerationAmount)
         {//TODO tests
@@ -76,7 +78,7 @@ public class RectangleService : IRectangleService
 
         _dbContext.Rectangles.AddRange(newRectangles);
 
-        _dbContext.SaveChanges();
+        await _dbContext.SaveChangesAsync();
     }
 #endif 
 }

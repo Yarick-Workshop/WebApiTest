@@ -4,10 +4,10 @@ namespace Logic;
 
 public interface IRectangleService
 {
-    RectangleView[] GetIntersected(IBoundingRectangle searchingSegment);
+    Task<RectangleView[]> GetIntersectedAsync(IBoundingRectangle searchingSegment);
 
 #if DEBUG
-    void GenerateList(int amount);
+    Task GenerateListAsync(int amount);
 #endif 
 
 }
