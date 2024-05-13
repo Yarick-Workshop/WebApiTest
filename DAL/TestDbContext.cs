@@ -2,19 +2,19 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DAL;
 
-public class TestContext : DbContext
+public class TestDbContext : DbContext
 {
     public DbSet<Rectangle> Rectangles { get; set; }
 
     public string DbPath { get; }
 
-    public TestContext()
+    public TestDbContext()
     {
         var folder = Environment.SpecialFolder.LocalApplicationData;
 
         var path = Environment.GetFolderPath(folder);
 
-        DbPath = System.IO.Path.Join(path, "rectangles.db");
+        DbPath = System.IO.Path.Join(path, "test.db");
     }
 
     // The following configures EF to create a Sqlite database file in the

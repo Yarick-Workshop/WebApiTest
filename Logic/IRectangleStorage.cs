@@ -4,5 +4,5 @@ namespace Logic;
 
 public interface IRectangleStorage
 {
-    Rectangle[] GetRectangles(IBoundingRectangle searchingSegment);
+    RectangleView[] GetRectangles(IBoundingRectangle searchingSegment);
 }

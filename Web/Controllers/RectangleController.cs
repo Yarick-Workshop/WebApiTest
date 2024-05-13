@@ -19,7 +19,7 @@ public class RectangleController : ControllerBase
     }
 
     [HttpPost(Name = "GetRectangles")]
-    public IEnumerable<Rectangle> Get(GetRectanglesRequest request)
+    public IEnumerable<RectangleView> Get(GetRectanglesRequest request)
     {
         return _rectangleStorage.GetRectangles(request);
     }

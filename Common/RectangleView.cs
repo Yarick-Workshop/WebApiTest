@@ -1,6 +1,6 @@
 namespace Common;
 
-public class Rectangle : IBoundingRectangle
+public class RectangleView : IBoundingRectangle
 {
     public int Id { get; set; }
 
