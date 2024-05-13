@@ -14,6 +14,17 @@ public class RectangleStorage : IRectangleStorage
 
     public RectangleView[] GetRectangles(IBoundingRectangle searchingSegment)
     {
+        //TODO unit tests for parameters validation
+        if (searchingSegment.MinX >= searchingSegment.MaxX)
+        {
+            throw new ArgumentException($"MaxX hast to be > MinX.");
+        }
+
+        if (searchingSegment.MinY >= searchingSegment.MaxY)
+        {
+            throw new ArgumentException($"MaxY hast to be > MinY.");
+        }
+
         return _dbContext.Rectangles
         .Where(x => x.MinX <= searchingSegment.MaxX && 
                     x.MinY <= searchingSegment.MaxY &&
