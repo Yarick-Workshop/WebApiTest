@@ -10,12 +10,12 @@ public class RectangleController : ControllerBase
 {
     private readonly ILogger<RectangleController> _logger;
 
-    private readonly IRectangleStorage _rectangleStorage;
+    private readonly IRectangleService _rectangleService;
 
-    public RectangleController(ILogger<RectangleController> logger, IRectangleStorage rectangleStorage)
+    public RectangleController(ILogger<RectangleController> logger, IRectangleService rectangleService)
     {
         _logger = logger;
-        _rectangleStorage = rectangleStorage;
+        _rectangleService = rectangleService;
     }
 
     /// <summary>
@@ -28,7 +28,7 @@ public class RectangleController : ControllerBase
     [HttpPost]
     public IEnumerable<RectangleView> GetIntersected(GetRectanglesRequest request)
     {
-        return _rectangleStorage.GetIntersected(request);
+        return _rectangleService.GetIntersected(request);
     }
 
 #if DEBUG
@@ -41,7 +41,7 @@ public class RectangleController : ControllerBase
     [HttpPut]
     public void GenerateList(int amount)
     {
-        _rectangleStorage.GenerateList(amount);
+        _rectangleService.GenerateList(amount);
     }
 #endif
 

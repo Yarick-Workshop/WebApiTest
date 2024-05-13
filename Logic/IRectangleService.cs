@@ -2,7 +2,7 @@ using Common;
 
 namespace Logic;
 
-public interface IRectangleStorage
+public interface IRectangleService
 {
     RectangleView[] GetIntersected(IBoundingRectangle searchingSegment);
 

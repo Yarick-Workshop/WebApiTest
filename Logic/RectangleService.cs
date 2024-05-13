@@ -3,11 +3,11 @@ using DAL;
 
 namespace Logic;
 
-public class RectangleStorage : IRectangleStorage
+public class RectangleService : IRectangleService
 {
     private readonly TestDbContext _dbContext;
 
-    public RectangleStorage(TestDbContext dbContext)
+    public RectangleService(TestDbContext dbContext)
     {
         _dbContext = dbContext;
     }

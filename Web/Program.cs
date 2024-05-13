@@ -9,7 +9,7 @@ internal class Program
 
         // Add services to the container.
 
-        builder.Services.AddTransient<IRectangleStorage, RectangleStorage>();
+        builder.Services.AddTransient<IRectangleService, RectangleService>();
 
         builder.Services.AddControllers();
         builder.Services.AddDbContext<TestDbContext>();
