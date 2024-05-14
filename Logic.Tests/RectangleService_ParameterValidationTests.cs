@@ -1,10 +1,4 @@
 using Common;
-using DAL;
-using Logic;
-using Microsoft.Extensions.Configuration;
-
-using NSubstitute;
-
 namespace Logic.Tests;
 
 [TestClass]
@@ -24,7 +18,7 @@ public class RectangleService_ParameterValidationTests
             MaxY = 10,
         };
 
-        using var context = CreateInMemoryContext();
+        using var context = Helper.CreateInMemoryContext();
 
         var service = new RectangleService(context);
 
@@ -47,7 +41,7 @@ public class RectangleService_ParameterValidationTests
             MaxY = maxY,
         };
 
-        using var context = CreateInMemoryContext();
+        using var context = Helper.CreateInMemoryContext();
 
         var service = new RectangleService(context);
 
@@ -64,8 +58,7 @@ public class RectangleService_ParameterValidationTests
     [DataRow(10000)]
     public async Task GenerateListAsync_When_wrong_rectangle_amount_Then_Throws_ArgumentOutOfRangeException(int amount)
     {
-        
-        using var context = CreateInMemoryContext();
+        using var context = Helper.CreateInMemoryContext();
 
         var service = new RectangleService(context);
 
@@ -74,17 +67,4 @@ public class RectangleService_ParameterValidationTests
         Assert.AreEqual("Has to be between 1 and 1000 (Parameter 'amount')", ex.Message);
     }
 #endif
-
-    private TestDbContext CreateInMemoryContext()
-    {//TODO extract to a separate class and fix in memory DB creation
-        var configuration = Substitute.For<IConfiguration>();
-        configuration.GetConnectionString("WebApiDatabase")
-            .ReturnsForAnyArgs("Filename=:memory:");
-
-        var context = new TestDbContext(configuration);
-
-        //await context.Database.EnsureCreated();
-
-        return context;
-    }
 }
