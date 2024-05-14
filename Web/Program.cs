@@ -1,5 +1,7 @@
 using DAL;
 using Logic;
+using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
 
 internal class Program
 {
@@ -12,7 +14,10 @@ internal class Program
         builder.Services.AddTransient<IRectangleService, RectangleService>();
 
         builder.Services.AddControllers();
-        builder.Services.AddDbContext<TestDbContext>();
+
+        builder.Services.AddDbContext<TestDbContext>(options =>
+            options.UseSqlite(builder.Configuration.GetConnectionString("WebApiDatabase")));
+
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();

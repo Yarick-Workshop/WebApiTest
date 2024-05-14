@@ -18,9 +18,9 @@ public class RectangleService_ParameterValidationTests
             MaxY = 10,
         };
 
-        using var context = Helper.CreateInMemoryContext();
+        using var container = new InMemoryContextContainer();
 
-        var service = new RectangleService(context);
+        var service = new RectangleService(container.Context);
 
         var ex = await  Assert.ThrowsExceptionAsync<ArgumentException>(() => service.GetIntersectedAsync(request));
 
@@ -41,9 +41,10 @@ public class RectangleService_ParameterValidationTests
             MaxY = maxY,
         };
 
-        using var context = Helper.CreateInMemoryContext();
 
-        var service = new RectangleService(context);
+        using var container = new InMemoryContextContainer();
+
+        var service = new RectangleService(container.Context);
 
         var ex = await Assert.ThrowsExceptionAsync<ArgumentException>(() => service.GetIntersectedAsync(request));
 
@@ -58,9 +59,9 @@ public class RectangleService_ParameterValidationTests
     [DataRow(10000)]
     public async Task GenerateListAsync_When_wrong_rectangle_amount_Then_Throws_ArgumentOutOfRangeException(int amount)
     {
-        using var context = Helper.CreateInMemoryContext();
+        using var container = new InMemoryContextContainer();
 
-        var service = new RectangleService(context);
+        var service = new RectangleService(container.Context);
 
         var ex = await Assert.ThrowsExceptionAsync<ArgumentOutOfRangeException>(() => service.GenerateListAsync(amount));
 
