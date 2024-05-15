@@ -2,7 +2,7 @@ using Common;
 namespace Logic.Tests;
 
 [TestClass]
-public class RectangleService_ParameterValidationTests
+public class RectangleService_ParameterValidation_Tests
 {
     [TestMethod]
     [DataRow(10.0, 10.0)]
