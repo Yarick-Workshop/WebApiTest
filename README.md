@@ -26,7 +26,7 @@ A simple WebAPI application for searching all intersected rectangles from DB. Th
 
 List of projects:
  - **Common** - common DTOs and interfaces;
- - **DAL**(Data Access Level) - EF context, entities and low level SQL logic(might be in the future);
+ - **DAL**(Data Access Layer) - EF context, entities and low level SQL logic(might be in the future);
  - **Logic** - Business Logic;
  - **Logic.Tests** - set of Integration test with Business Logic. In-memory sqlite DB is used for testing there;
  - **Web** - WebAPI application itself.
