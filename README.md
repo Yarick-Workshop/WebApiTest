@@ -11,7 +11,7 @@ This work is licensed under a
 
 ## WebAPI .NET test project
 <p align="center" width="100%">
-    <img width="75%" src="logo.png">
+    <img width="50%" src="logo.png">
 </p>
 
 This project was developed as  a test task. But I found that it might be a good 
